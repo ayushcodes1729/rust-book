@@ -1,3 +1,4 @@
+#[derive(Debug)]
 struct Rectangle {
     length: u32,
     breadth: u32
@@ -13,6 +14,7 @@ fn main() {
         breadth: 10
     };
 
+    println!("This is rectangle = {rect1:?}");
     let result = area_of_rectangle(rect1);
 
     print!("{}",result);
