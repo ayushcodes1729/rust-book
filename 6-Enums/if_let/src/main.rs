@@ -1,3 +1,5 @@
+use std::fmt::format;
+
 enum Coin {
 	Penny,
 	Nickel,
@@ -9,7 +11,6 @@ enum Coin {
 enum UsState {
     Alabama,
     Alaska,
-    // --snip--
 }
 
 impl UsState {
@@ -17,10 +18,27 @@ impl UsState {
         match self {
             UsState::Alabama => year >= 1819,
             UsState::Alaska => year >= 1959,
-            // -- snip --
         }
     }
 }
 
+fn describe_state_quarter(coin: Coin) -> Option<String> {
+    let Coin::Quarter(state) = coin else {
+        return  None;
+    };
+
+    if state.existed_in(1900) {
+        Some(format!("{state:?} is pretty old"))
+    }
+    else {
+        Some(format!("{state:?} is relatively new"))
+    }
+}
+
 fn main() {
+
+    let coin = Coin::Quarter(UsState::Alaska);
+    let result = describe_state_quarter(coin).unwrap();
+
+    println!("{result}")
 }
